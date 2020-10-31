@@ -15,6 +15,15 @@ class CreatePermisosTable extends Migration
     {
         Schema::create('permisos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('description')->nullable();
+            $table->unsignedInteger('rol_id');
+            $table->foreign('rol_id')
+                        ->references('id')
+                        ->on('rols')
+                        ->onUpdate('cascade')
+                        ->onDelete('cascade');
             $table->timestamps();
         });
     }
