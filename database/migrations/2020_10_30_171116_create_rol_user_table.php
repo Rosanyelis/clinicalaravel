@@ -15,15 +15,15 @@ class CreateRolUserTable extends Migration
     {
         Schema::create('rol_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('rol_id');
-            $table->unsignedInteger('user_id');
+            $table->uuid('rol_id')->index();
+            $table->uuid('user_id')->index();
             $table->foreign('rol_id')
-                    ->references('id')
+                    ->references('rol_id')
                     ->on('rols')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->foreign('user_id')
-                    ->references('id')
+                    ->references('user_id')
                     ->on('users')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');

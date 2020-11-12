@@ -15,15 +15,15 @@ class CreatePermisoUserTable extends Migration
     {
         Schema::create('permiso_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('permiso_id');
+            $table->uuid('permiso_id')->index();
+            $table->uuid('user_id')->index();
             $table->foreign('permiso_id')
-                    ->references('id')
+                    ->references('permiso_id')
                     ->on('permisos')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
-            $table->unsignedInteger('user_id');
             $table->foreign('user_id')
-                    ->references('id')
+                    ->references('user_id')
                     ->on('users')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
